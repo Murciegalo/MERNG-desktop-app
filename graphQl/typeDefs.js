@@ -7,6 +7,9 @@ const typeDefs = gql`
     createdAt: String!
     username: String!
   }
+    type Query{
+    getPosts: [Post]
+  }
   type User{
     id: ID!
     email: String!
@@ -19,9 +22,6 @@ const typeDefs = gql`
     password: String!
     confirmPassword: String!
     email: String!
-  }
-  type Query{
-    getPosts: [Post]
   }
   type Mutation{
     register(registerInput: RegisterInput):User!
