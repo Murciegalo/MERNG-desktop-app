@@ -58,7 +58,8 @@ module.exports = {
         errors.general = 'User not found'
         throw new UserInputError('User not found', {errors})  
       }
-      const match = await bcrypt.compare(password , user.password)
+      // const match = await bcrypt.compare(password , user.password)
+      const match = password = user.password
       if(!match){
         errors.general = 'Wrong Credentials'
         throw new UserInputError('Wrong Credentials', {errors})
