@@ -4,6 +4,7 @@ const {UserInputError} = require('apollo-server');
 
 const User = require('../../Models/User');
 const {SECRET_KEY} = require('../../confg');
+const validateRegisterInput = require('../../utils/validators.js')
 
 module.exports = {
   Mutation: {
@@ -12,13 +13,16 @@ module.exports = {
       {registerInput: {username, email, password, confirmPassword}}, 
     ){
       // Validation
-      
+      const {valid , errors } = validateRegisterInput(username,email,password,confirmPassword)
+      if(!valid){
+        throw new UserInputError('Errors' , {errors})
+      }      
       // User exists?
       const user = await User.findOne({email})
       if(user){
         throw new UserInputError(
-          'Invalid email', 
-          { err: { msg: 'Invalid email, sorry'}}
+          'Invalid credentials', 
+          { err: { msg: 'Invalid credentials, sorry'}}
         )
       }
       // hash password & create auth token
