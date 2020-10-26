@@ -1,10 +1,9 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const {UserInputError} = require('apollo-server');
+const bcrypt = require('bcryptjs')
+const {UserInputError} = require('apollo-server')
 
-const User = require('../../Models/User');
-const {SECRET_KEY} = require('../../confg');
+const User = require('../../Models/User')
 const {validateRegisterInput,validateLoginInput} = require('../../utils/validators.js')
+const createJwt = require('../../utils/token')
 
 module.exports = {
   Mutation: {
@@ -34,14 +33,7 @@ module.exports = {
         createdAt: new Date().toISOString()
       });
       const res = await newUser.save()
-      const token = jwt.sign({
-        id: res.id,
-        email: res.email,
-        username: res.username
-      }, 
-        SECRET_KEY , 
-        {expiresIn: '1h'}
-      );
+      const token = createJwt(res)
       return {
         ...res._doc,
         id: res._id,
@@ -64,14 +56,7 @@ module.exports = {
         errors.general = 'Wrong Credentials'
         throw new UserInputError('Wrong Credentials', {errors})
       }
-      const token = jwt.sign({
-        id: user.id,
-        email: user.email,
-        username: user.username
-      }, 
-        SECRET_KEY , 
-        {expiresIn: '1h'}
-      );
+      const token = createJwt(user)
       return {
         ...user._doc,
         id: user._id,
