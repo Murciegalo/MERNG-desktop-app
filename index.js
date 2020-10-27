@@ -8,7 +8,8 @@ const resolvers = require('./graphQl/resolvers/index');
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: ({req}) => ({req}) //forward the req.body from the request to context 
 })
 
 mongoose.connect( 

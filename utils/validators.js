@@ -39,4 +39,4 @@ const validateLoginInput = ( email, password) => {
   }
 }
 
-module.exports = {validateRegisterInput ,validateLoginInput }
+module.exports = {validateRegisterInput ,validateLoginInput}
