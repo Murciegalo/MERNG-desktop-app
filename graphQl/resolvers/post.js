@@ -57,7 +57,7 @@ module.exports = {
       }
     },
     async createComment(_, { postId, body }, context){
-      const user = authCheck(context)
+      const {username} = authCheck(context)
       if(body.trim() === ''){
         throw new UserInputError('Empty comment',{
           errors: {
@@ -69,7 +69,7 @@ module.exports = {
       if(post){
         post.comments.unshift({ 
           body, 
-          username: user.username, 
+          username, 
           createdAt: new Date().toISOString()
         })
         await post.save()
@@ -77,8 +77,21 @@ module.exports = {
       }
       else throw new UserInputError('Post not found')
     },
-    async deleteComment(_, { body }, context){
-      const user = authCheck(context)
+    async deleteComment(_, { postId, commentId }, context){
+      const {username} = authCheck(context)
+      const post = await Post.findById(postId)
+      if(post){
+        const findComment = post.comments.findIndex(c => c.id === commentId)
+        if(post.comments[findComment].username === username){
+          post.comments.splice(findComment,1);
+          await post.save()
+          return post;
+        }
+        else{
+          throw new AuthenticationError('Sorry, you can only remove your own comments')
+        }
+      }
+      else throw new UserInputError('Post not found')
     },
     async likePost(_, { body }, context){
       const user = authCheck(context)
