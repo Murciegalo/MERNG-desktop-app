@@ -38,6 +38,10 @@ module.exports = {
         createdAt: new Date().toISOString()
       })
       const savedPost = await newPost.save()
+      //Publish 
+      context.pubsub.publish('New Post', {
+        newPost: savedPost 
+      })
       return savedPost;
     },
     async deletePost(_, { postId }, context){
@@ -112,5 +116,10 @@ module.exports = {
       }
       else throw new UserInputError('Post not found')
     },
+  },
+  Subscription:{
+    newPost:{                                       //convention type
+      subscribe:(_,__,{ pubsub }) => pubsub.asyncIterator('New Post')
+    }
   }
 }

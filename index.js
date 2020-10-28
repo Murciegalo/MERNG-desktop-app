@@ -1,15 +1,15 @@
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer, PubSub } = require('apollo-server');
 const mongoose = require('mongoose');
 
 const { MONGO_DB } = require('./confg.js')
 const typeDefs = require('./graphQl/typeDefs');
 const resolvers = require('./graphQl/resolvers/index');
 
-
+const pubsub = new PubSub();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({req}) => ({req}) //forward the req.body from the request to context 
+  context: ({req}) => ({req, pubsub}) //forward the req.body from the request to context 
 })
 
 mongoose.connect( 
