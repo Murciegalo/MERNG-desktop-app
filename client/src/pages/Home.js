@@ -15,7 +15,7 @@ const Home = () => {
       { loading ? (
           <h1>Loading Posts...</h1> 
         ) : (
-          posts && posts.map(post => (
+          posts !== undefined && posts.map(post => (
             <Grid.Column key={post.id} style={{marginBottom: 20}}>
               <PostCard post={post} />        
             </Grid.Column>
