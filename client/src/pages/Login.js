@@ -37,7 +37,7 @@ const Login = (props) => {
   return (
     <div className="form-container">
       <Form onSubmit={handleSubmit} className={!loading ? "": "loading"}>
-        <h1 className="page-title">Register</h1>
+        <h1 className="page-title">Login</h1>
         <Form.Input
           label="Email"
           placeholder="Email.."
