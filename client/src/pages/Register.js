@@ -1,9 +1,9 @@
-import gql from 'graphql-tag';
 import React, {useState} from 'react'
+import gql from 'graphql-tag';
 import {Button, Form} from 'semantic-ui-react'
 import {useMutation} from '@apollo/react-hooks'
 
-export const Register = (props) => {
+const Register = (props) => {
   // const [errors, setErrors] = useState({})
   const [data, setData] = useState({
     username: '',
@@ -107,3 +107,4 @@ const REGISTER_USER = gql`
     }
   }
 `
+export default Register;

@@ -11,7 +11,7 @@ const Home = () => {
       <h1>Recent Posts</h1>
     </Grid.Row>
     <Grid.Row>
-      { loading ? (
+      { loading && loading !== undefined ? (
           <h1>Loading Posts...</h1> 
         ) : (
           posts && posts.map(post => (
