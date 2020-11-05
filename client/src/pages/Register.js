@@ -3,7 +3,8 @@ import React, {useState} from 'react'
 import {Button, Form} from 'semantic-ui-react'
 import {useMutation} from '@apollo/react-hooks'
 
-export const Register = () => {
+export const Register = (props) => {
+  // const [errors, setErrors] = useState({})
   const [data, setData] = useState({
     username: '',
     email:'',
@@ -12,14 +13,20 @@ export const Register = () => {
   })
   const {username, email, password, confirmPassword} = data;
   const [ addUser, {loading} ] = useMutation(REGISTER_USER, {
-    update(proxy, result){
-      console.log(result)
+    update(_, result){
+      props.history.push('/')
     },
     variables: data
   })
   const handleSubmit = e => {
     e.preventDefault()
     addUser()
+    setData({
+      username: '',
+      email:'',
+      password:'',
+      confirmPassword:''
+    })
   }
   const handleChange = e => {
     setData({
@@ -29,7 +36,7 @@ export const Register = () => {
   }
   return (
     <div className="form-container">
-      <Form onSubmit={handleSubmit} noValidate>
+      <Form onSubmit={handleSubmit} className={!loading ? "": "loading"}>
         <h1 className="page-title">Register</h1>
         <Form.Input
           label="Username"
@@ -38,6 +45,7 @@ export const Register = () => {
           type="text"
           value={username}
           onChange={handleChange}
+          required
         />
         <Form.Input
           label="Email"
@@ -46,6 +54,7 @@ export const Register = () => {
           type="email"
           value={email}
           onChange={handleChange}
+          required
         />
         <Form.Input
           label="Password"
@@ -54,6 +63,7 @@ export const Register = () => {
           type="password"
           value={password}
           onChange={handleChange}
+          required
         />
         <Form.Input
           label="Confirm Password"
@@ -62,9 +72,18 @@ export const Register = () => {
           type="password"
           value={confirmPassword}
           onChange={handleChange}
+          required
+          // error={errors.confirmPassword ? true : false}
         />
         <Button type="submit" primary>Register</Button>
       </Form>      
+      {/* {
+        Object.keys(errors).length > 0 && <div className="ui error message">
+          <ul className="list">
+            {Object.values(errors).map(el => <li key={el}>{el}</li>)}
+          </ul>
+        </div>
+      } */}
     </div>
   )
 }

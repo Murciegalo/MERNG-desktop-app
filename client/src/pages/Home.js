@@ -6,7 +6,6 @@ import PostCard from '../components/PostCard'
 
 const Home = () => {
   const { loading, data: {getPosts: posts }} = useQuery(FETCH_POSTS_QUERY)
-  
   return <Grid columns={3} divided>
     <Grid.Row className="page-title">
       <h1>Recent Posts</h1>
@@ -15,7 +14,7 @@ const Home = () => {
       { loading ? (
           <h1>Loading Posts...</h1> 
         ) : (
-          posts !== undefined && posts.map(post => (
+          posts && posts.map(post => (
             <Grid.Column key={post.id} style={{marginBottom: 20}}>
               <PostCard post={post} />        
             </Grid.Column>

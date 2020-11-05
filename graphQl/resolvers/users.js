@@ -14,7 +14,7 @@ module.exports = {
       // Validation
       const {valid , errors } = validateRegisterInput(username,email,password,confirmPassword)
       if(!valid){
-        throw new UserInputError('Errors' , {errors})
+        throw new UserInputError('Errors' , errors)
       }      
       // User exists?
       const user = await User.findOne({email})
