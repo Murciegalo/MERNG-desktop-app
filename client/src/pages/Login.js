@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import gql from 'graphql-tag';
 import {Button, Form} from 'semantic-ui-react'
 import {useMutation} from '@apollo/react-hooks'
-
+import {AuthContext} from '../context/auth'
 
 const Login = (props) => {
+  const authContext = useContext(AuthContext)
   const [data, setData] = useState({
     email:'',
     password:'',
