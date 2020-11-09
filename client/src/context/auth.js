@@ -25,7 +25,6 @@ function authReducer(state, action){
 
 function AuthProvider(props){
   const [state ,dispatch] = useReducer(authReducer, {user: null})
-  
   function login(userData){
     dispatch({ type: 'LOGIN', payload: userData })
   }
@@ -36,7 +35,9 @@ function AuthProvider(props){
       login,
       logout,
       ...props
-    }}/>
+    }}>
+      {props.children}
+    </AuthContext.Provider>
   )
 }
 

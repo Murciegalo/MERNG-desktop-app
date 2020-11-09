@@ -12,12 +12,12 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Container>
-          <MainMenu />
-          <Route exact path='/' component={Home} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
-        </Container>
+          <Container>
+            <MainMenu />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+          </Container>
       </Router>
     </AuthProvider>
   );

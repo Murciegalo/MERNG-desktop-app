@@ -5,7 +5,7 @@ import {useMutation} from '@apollo/react-hooks'
 import {AuthContext} from '../context/auth'
 
 const Login = (props) => {
-  const authContext = useContext(AuthContext)
+  const {login} = useContext(AuthContext)
   const [data, setData] = useState({
     email:'',
     password:'',
@@ -13,7 +13,7 @@ const Login = (props) => {
   const {email,password} = data;
     const [ loginUser, {loading} ] = useMutation(LOGIN_USER, {
     update(_, result){
-      console.log('LOGIN', result);
+      login(result.data.login);
       props.history.push('/')
     },
     variables: data
@@ -57,7 +57,7 @@ const Login = (props) => {
           onChange={handleChange}
           required
         />
-        <Button type="submit" primary>Register</Button>
+        <Button type="submit" primary>Login</Button>
       </Form>      
     </div>
   )
