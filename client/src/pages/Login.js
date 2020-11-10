@@ -2,7 +2,6 @@ import React, {useState,useContext} from 'react'
 import gql from 'graphql-tag';
 import {Button, Form} from 'semantic-ui-react'
 import {useMutation} from '@apollo/react-hooks'
-// import {useParams} from 'react-router-dom';
 import {AuthContext} from '../context/auth'
 
 const Login = (props) => {
