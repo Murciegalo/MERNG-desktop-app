@@ -8,7 +8,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import {AuthProvider} from './context/auth';
-import AuthRoute from './utils/privateRoutes'
 import {AuthContext} from './context/auth'
 
 function App() {
@@ -19,8 +18,22 @@ function App() {
           <Container>
             <MainMenu />
               <Route exact path='/' component={Home} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/register' component={Register} />
+              <Route exact path='/login' render={
+                () => user ? (
+                  <Redirect to='/' />
+                  ) : (
+                    <Login />
+                  )
+                }
+              />
+              <Route exact path='/register' render={
+                () => user ? (
+                  <Redirect to='/' />
+                  ) : (
+                    <Register />
+                  )
+                }
+              />
           </Container>
       </Router>
     </AuthProvider>
