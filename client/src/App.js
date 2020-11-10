@@ -3,12 +3,11 @@ import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css'
 import {Container} from 'semantic-ui-react'
-import MainMenu from './components/MainMenu';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import {AuthProvider} from './context/auth';
-import {AuthContext} from './context/auth'
+import MainMenu from './components/MainMenu'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import {AuthContext,AuthProvider} from './context/auth'
 
 function App() {
   const {user} = useContext(AuthContext)
