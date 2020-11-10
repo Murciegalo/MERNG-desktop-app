@@ -19,10 +19,10 @@ function App() {
             <MainMenu />
               <Route exact path='/' component={Home} />
               <Route exact path='/login' render={
-                () => user ? (
+                (routeParams) => user ? (
                   <Redirect to='/' />
                   ) : (
-                    <Login />
+                    <Login {...routeParams} />
                   )
                 }
               />

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Menu } from 'semantic-ui-react'
 import {AuthContext} from '../context/auth'
 
 const MainMenu = () => {
   const {user, logout} = useContext(AuthContext)
   const location = window.location.pathname;
-  const path = location === '/' ? 'home' : location.substr(1) 
-  const [activeItem, setActiveItem] = useState(path)
+  const pathI = location === '/' ? 'home' : location.substr(1) 
+  const [activeItem, setActiveItem] = useState(pathI)
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
 
