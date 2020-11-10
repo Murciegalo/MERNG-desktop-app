@@ -1,18 +1,16 @@
-const { AuthenticationError, UserInputError } = require('apollo-server');
-const { argsToArgsConfig } = require('graphql/type/definition');
-const Post = require('../../Models/Post');
-const authCheck = require('../../utils/authCheck');
-
+const { AuthenticationError, UserInputError } = require('apollo-server')
+const Post = require('../../Models/Post')
+const authCheck = require('../../utils/authCheck')
 
 module.exports = {
   Query:{
-    async getPosts(_){
+    async getPosts() {
       try {
-        const posts = await Post.find()
+        const posts = await Post.find().sort({ createdAt: -1 })
         return posts
       } 
       catch (err) {
-        throw new Error(err.message)
+        throw new Error(err)
       }
     },
     async getPost(_, {postId}){

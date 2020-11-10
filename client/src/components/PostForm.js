@@ -2,20 +2,26 @@ import React, {useState} from 'react'
 import {Form,Button} from 'semantic-ui-react';
 import {useMutation} from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import {FETCH_POSTS_QUERY} from '../graphQueries/FetchPosts';
 
 const PostForm = () => {
-  const [data, setData] = useState({
+  const [comment, setData] = useState({
     body: ''
   })
 
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
-    update(_, result){
-    setData({
-      ...data,
-      body:''
-    })
-    },
-    variables: data
+    variables: comment,
+    update(proxy, result){
+      const data = proxy.readQuery({
+        query: FETCH_POSTS_QUERY
+      })
+      data.getPosts = [ result.data.createPost, ...data.getPosts ]
+      proxy.writeQuery({query: FETCH_POSTS_QUERY, data})
+      setData({
+        ...comment,
+        body:''
+      })
+    }
   })
   const handleSubmit = e => {
     e.preventDefault()
@@ -34,7 +40,7 @@ const PostForm = () => {
           placeholder="Hi world!"
           name="body"
           onChange={handleChange}
-          value={data.body}
+          value={comment.body}
           required
         />
         <Button type="submit" color="teal">Submit</Button>
