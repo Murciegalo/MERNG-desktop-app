@@ -30,9 +30,8 @@ const PostForm = () => {
   const handleChange = e => setData({ 
     [e.target.name] : e.target.value 
   })
-  
 
-  return (
+  return <>
     <Form onSubmit={handleSubmit}>
       <h2>Create a Post</h2>
       <Form.Field>
@@ -42,11 +41,12 @@ const PostForm = () => {
           onChange={handleChange}
           value={comment.body}
           required
+          // error={error ? true : false}
         />
         <Button type="submit" color="teal">Submit</Button>
       </Form.Field>
     </Form>
-  )
+  </>
 }
 const CREATE_POST_MUTATION = gql`
   mutation createPost($body: String!){

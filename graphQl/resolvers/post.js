@@ -31,7 +31,7 @@ module.exports = {
     async createPost(_, { body }, context){
       const user = authCheck(context)
       if(body.trim() === ''){
-        throw new Error('Please write something nice ,xD')
+        return new Error('Please write something nice ,xD')
       }
       const newPost = new Post({
         body,
@@ -55,7 +55,7 @@ module.exports = {
           return 'Post deleted successfully'
         }
         else{
-          throw new AuthenticationError('Action not allowed')
+          throw new AuthenticationError('You can only delete your own posts, sorry')
         }  
       } 
       catch (err) {

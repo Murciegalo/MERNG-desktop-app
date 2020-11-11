@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {useQuery} from '@apollo/react-hooks'
-import { Grid, GridColumn } from 'semantic-ui-react'
+import { Grid, GridColumn, Transition } from 'semantic-ui-react'
 import {FETCH_POSTS_QUERY} from '../graphQueries/FetchPosts';
 import {AuthContext} from '../context/auth'
 import PostCard from '../components/PostCard'
@@ -17,13 +17,14 @@ const Home = () => {
       </Grid.Row>
       <Grid.Row>
         {user && <GridColumn><PostForm /></GridColumn>}
+        <Transition.Group>
         { data.getPosts.length > 0 ? ( 
             data.getPosts.map(post => (  
               <Grid.Column key={post.id} style={{marginBottom: 20}}>    
                 <PostCard post={post} />          
               </Grid.Column>))
           ): null
-        }
+        }</Transition.Group>
       </Grid.Row>
     </Grid>
 }
