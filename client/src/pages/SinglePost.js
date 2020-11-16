@@ -11,21 +11,23 @@ const SinglePost = (props) => {
   const postId = props.match.params.postId
   const {user} = useContext(AuthContext)
 
-  const {data:{ getPost }} = useQuery(FETCH_POST_QUERY, {
+  const {data} = useQuery(FETCH_POST_QUERY, {
     variables: {postId}
   });
-  const {id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost;
+  
+  
   const deletePostCB = () => props.history.push('/')
-  const deleteBtn = user && user.username === username && <
+  const deleteBtn = user && user.username === data.getPost.username && <
     DeleteBtn 
-      postId={id}
+      postId={data.getPost.id}
       callback={deletePostCB} 
     />
 
-  if(!getPost){
+  if(!data.getPost){
     markUp = <p>Loading post...</p>
   }
   else{
+    const {id, body, createdAt, username, comments, likes, likeCount, commentCount } = data.getPost;
     markUp = <Grid>
       <Grid.Row>
         <Grid.Column width={2}>

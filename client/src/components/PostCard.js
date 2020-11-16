@@ -26,7 +26,6 @@ const PostCard = ({
       <Card.Content extra>
         <LikeBtn user={user} post={{id,likes,likeCount}}/>
         <Button 
-          as="div" 
           labelPosition="right"
           as={Link}
           to={`/posts/${id}`}
