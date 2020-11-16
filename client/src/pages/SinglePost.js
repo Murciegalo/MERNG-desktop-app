@@ -4,6 +4,7 @@ import {useQuery} from '@apollo/react-hooks';
 import { FETCH_POST_QUERY } from '../graphQueries/FetchPosts';
 import LikeBtn from '../components/LikeBtn';
 import {AuthContext} from '../context/auth'
+import { DeleteBtn } from '../components/DeleteBtn';
 
 const SinglePost = (props) => {
   let markUp;
@@ -13,12 +14,18 @@ const SinglePost = (props) => {
   const {data:{ getPost }} = useQuery(FETCH_POST_QUERY, {
     variables: {postId}
   });
+  const {id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost;
+  const deletePostCB = () => props.history.push('/')
+  const deleteBtn = user && user.username === username && <
+    DeleteBtn 
+      postId={id}
+      callback={deletePostCB} 
+    />
 
   if(!getPost){
     markUp = <p>Loading post...</p>
   }
   else{
-    const {id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost;
     markUp = <Grid>
       <Grid.Row>
         <Grid.Column width={2}>
@@ -49,17 +56,14 @@ const SinglePost = (props) => {
                   {commentCount}
                 </Label>
               </Button>
+              {deleteBtn}
             </Card.Content>
           </Card>
         </Grid.Column>
       </Grid.Row>
     </Grid>
   }
-  return (
-    <>
-     {markUp} 
-    </>
-  )
+  return markUp 
 }
 
 export default SinglePost;
