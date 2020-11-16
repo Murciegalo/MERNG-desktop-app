@@ -3,14 +3,17 @@ import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import './App.css'
 import {Container} from 'semantic-ui-react'
+
 import MainMenu from './components/MainMenu'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import SinglePost from './pages/SinglePost'
 import {AuthContext,AuthProvider} from './context/auth'
 
 function App() {
   const {user} = useContext(AuthContext)
+  console.log(user)
   return (
     <AuthProvider>
       <Router>
@@ -31,6 +34,14 @@ function App() {
                   ) : (
                     <Register {...routeParams}/>
                   )
+                }
+              />
+              <Route exact path='/posts/:postId' render={
+                routeParams => user ? (
+                  <Redirect to='/' />
+                  ) : (
+                    <SinglePost {...routeParams}/>
+                    )
                 }
               />
           </Container>
