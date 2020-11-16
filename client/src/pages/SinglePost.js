@@ -17,13 +17,13 @@ const SinglePost = (props) => {
   
   
   const deletePostCB = () => props.history.push('/')
-  const deleteBtn = user && user.username === data.getPost.username && <
+  const deleteBtn = user && data && user.username === data.getPost.username && <
     DeleteBtn 
       postId={data.getPost.id}
       callback={deletePostCB} 
     />
 
-  if(!data.getPost){
+  if(!data){
     markUp = <p>Loading post...</p>
   }
   else{
