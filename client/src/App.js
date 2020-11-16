@@ -38,9 +38,9 @@ function App() {
               />
               <Route exact path='/posts/:postId' render={
                 routeParams => user ? (
-                  <Redirect to='/' />
+                  <SinglePost {...routeParams}/>
                   ) : (
-                    <SinglePost {...routeParams}/>
+                    <Redirect to='/' />
                     )
                 }
               />

@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import { Link } from 'react-router-dom';
 import {Card, Image, Button, Icon, Label} from 'semantic-ui-react'
 import {AuthContext} from '../context/auth';
+import { DeleteBtn } from './DeleteBtn';
 import LikeBtn from './LikeBtn';
 
 const PostCard = ({
@@ -9,10 +10,7 @@ const PostCard = ({
 }) => {
   const {user} = useContext(AuthContext)
 
-  const deleteBtn = user && user.username === username ? <
-    Button as="div" color="red" floated="right" onClick={() => console.log('deleted')}>
-      <Icon name="trash" style={{margin:0}}/>
-    </Button> : ''
+  const deleteBtn = user && user.username === username && <DeleteBtn />
   return (
     <Card>
       <Card.Content>

@@ -1,4 +1,4 @@
-import React, {useEffect,useContext} from 'react'
+import React, {useContext} from 'react'
 import {Button, Card, Grid, Icon, Image, Label} from 'semantic-ui-react'
 import {useQuery} from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
@@ -10,8 +10,7 @@ const SinglePost = (props) => {
   let markUp;
   const postId = props.match.params.postId
   const {user} = useContext(AuthContext)
-  console.log(postId);
-  
+
   const {data:{ getPost }} = useQuery(FETCH_POST_QUERY, {
     variables: {postId}
   });
@@ -47,7 +46,7 @@ const SinglePost = (props) => {
                 <Button color="blue" basic>
                   <Icon name="comments"/>
                 </Button>
-                <Label color="blue" pointing="left"basic>
+                <Label basic color="blue" pointing="left">
                   {commentCount}
                 </Label>
               </Button>
