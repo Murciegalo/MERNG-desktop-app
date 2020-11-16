@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import {Button, Card, Grid, Icon, Image, Label} from 'semantic-ui-react'
 import {useQuery} from '@apollo/react-hooks';
-import { Link } from 'react-router-dom';
 import { FETCH_POST_QUERY } from '../graphQueries/FetchPosts';
 import LikeBtn from '../components/LikeBtn';
 import {AuthContext} from '../context/auth'

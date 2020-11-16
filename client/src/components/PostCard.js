@@ -10,7 +10,7 @@ const PostCard = ({
 }) => {
   const {user} = useContext(AuthContext)
 
-  const deleteBtn = user && user.username === username && <DeleteBtn />
+  const deleteBtn = user && user.username === username && <DeleteBtn postId={id} />
   return (
     <Card>
       <Card.Content>
