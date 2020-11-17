@@ -27,7 +27,7 @@ const SinglePost = (props) => {
     markUp = <p>Loading post...</p>
   }
   else{
-    const {id, body, createdAt, username, comments, likes, likeCount, commentCount } = data.getPost;
+    const {id, body, createdAt, username, comments, likes, commentCount } = data.getPost;
     markUp = <Grid>
       <Grid.Row>
         <Grid.Column width={2}>
@@ -61,6 +61,13 @@ const SinglePost = (props) => {
               {deleteBtn}
             </Card.Content>
           </Card>
+          {comments.map(c => <Card fluid key={c.id}>
+            <Card.Content>
+              <Card.Header>{c.username}</Card.Header>
+              <Card.Meta>{c.createdAt.toLocaleString("mm/dd/yyyy")}</Card.Meta>
+              <Card.Description>{c.body}</Card.Description>
+            </Card.Content>
+          </Card>)}
         </Grid.Column>
       </Grid.Row>
     </Grid>
