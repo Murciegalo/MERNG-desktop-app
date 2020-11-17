@@ -54,3 +54,18 @@ export const DELETE_COMMENT_MUTATION = gql`
     }
   }
 `
+
+export const SUBMIT_COMMENT_MUTATION = gql`
+  mutation($postId:ID!, $body:String!){
+    createComment(postId: $postId, body: $body){
+      id
+      comments{
+        id
+        username
+        createdAt
+        body
+      }
+      commentCount
+    }
+  }
+`

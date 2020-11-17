@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Card, Grid, Icon, Image, Label} from 'semantic-ui-react'
+import {Card} from 'semantic-ui-react'
 import { DeleteBtn } from './DeleteBtn';
 
 const SingleComment = ({comment:{id,username,createdAt,body}, user, postId}) => {
