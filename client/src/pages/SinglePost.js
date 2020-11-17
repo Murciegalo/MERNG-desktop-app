@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {Button, Card, Form, Grid, Icon, Image, Label} from 'semantic-ui-react'
+import {Button, Card, Form, Grid, Icon, Image, Label, Popup} from 'semantic-ui-react'
 import {useMutation, useQuery} from '@apollo/react-hooks';
 import { FETCH_POST_QUERY, SUBMIT_COMMENT_MUTATION } from '../graphQueries/FetchPosts';
 import LikeBtn from '../components/LikeBtn';
@@ -57,18 +57,23 @@ const SinglePost = (props) => {
             <hr/>
             <Card.Content extra>
               <LikeBtn user={user} post={{id,likes}}/>
-              <Button
-                as="div"
-                labelPosition="right"
-                onClick={() => console.log('in progress')}
-              >
-                <Button color="blue" basic>
-                  <Icon name="comments"/>
-                </Button>
-                <Label basic color="blue" pointing="left">
-                  {commentCount}
-                </Label>
-              </Button>
+              <Popup 
+                content="Comment on post"
+                trigger={
+                  <Button
+                    as="div"
+                    labelPosition="right"
+                    onClick={() => console.log('in progress')}
+                  >
+                    <Button color="blue" basic>
+                      <Icon name="comments"/>
+                    </Button>
+                    <Label basic color="blue" pointing="left">
+                      {commentCount}
+                    </Label>
+                  </Button>
+                }
+              />
               {deleteBtn}
             </Card.Content>
           </Card>
