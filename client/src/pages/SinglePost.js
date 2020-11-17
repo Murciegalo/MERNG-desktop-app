@@ -45,7 +45,7 @@ const SinglePost = (props) => {
             </Card.Content>
             <hr/>
             <Card.Content extra>
-              <LikeBtn user={user} post={{id,likeCount,likes}}/>
+              <LikeBtn user={user} post={{id,likes}}/>
               <Button
                 as="div"
                 labelPosition="right"

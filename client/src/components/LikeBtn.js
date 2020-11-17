@@ -4,7 +4,7 @@ import {useMutation} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Link } from 'react-router-dom';
 
-const LikeBtn = ({user, post:{id, likes, likeCount}}) => {
+const LikeBtn = ({user, post:{id, likes}}) => {
   const [liked, setLiked] = useState(false)
   useEffect(() => {
     if(user && likes.find(like => like.username === user.username)){
@@ -39,7 +39,7 @@ const LikeBtn = ({user, post:{id, likes, likeCount}}) => {
      >
       {likedBtn}     
        <Label basic color="teal" pointing="left">
-         {likeCount}
+         {likes.length}
        </Label>
   </Button>
   )

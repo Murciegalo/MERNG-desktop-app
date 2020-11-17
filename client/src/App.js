@@ -40,7 +40,7 @@ function App() {
                 routeParams => user ? (
                   <SinglePost {...routeParams}/>
                   ) : (
-                    <Redirect to='/' />
+                    <Redirect to='/login' />
                     )
                 }
               />
