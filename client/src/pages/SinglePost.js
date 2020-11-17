@@ -5,6 +5,7 @@ import { FETCH_POST_QUERY } from '../graphQueries/FetchPosts';
 import LikeBtn from '../components/LikeBtn';
 import {AuthContext} from '../context/auth'
 import { DeleteBtn } from '../components/DeleteBtn';
+import SingleComment from '../components/SingleComment';
 
 const SinglePost = (props) => {
   let markUp;
@@ -61,13 +62,7 @@ const SinglePost = (props) => {
               {deleteBtn}
             </Card.Content>
           </Card>
-          {comments.map(c => <Card fluid key={c.id}>
-            <Card.Content>
-              <Card.Header>{c.username}</Card.Header>
-              <Card.Meta>{c.createdAt.toLocaleString("mm/dd/yyyy")}</Card.Meta>
-              <Card.Description>{c.body}</Card.Description>
-            </Card.Content>
-          </Card>)}
+          {comments.map(c => <SingleComment key={c.id} comment={c} user={user} postId={id}/>)}
         </Grid.Column>
       </Grid.Row>
     </Grid>
